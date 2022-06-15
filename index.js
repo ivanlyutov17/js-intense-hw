@@ -69,4 +69,3 @@ else throw new Error(MESSAGE_ERROR);
 
 }
 
-for(let item of myIterable) console.log(item);
