@@ -20,9 +20,9 @@ return copObj;
 // 2
 
 const selectFromInterval = (arr,start,end)=>{
-if(typeof arr === 'object'){
+if(Array.isArray(arr)){
     for(let i = 0;i<arr.length;i++){
-        if(typeof arr[i] !== 'number'|| isNaN(start) || isNaN(end)) {
+        if(isNaN(arr[i]) || isNaN(start) || isNaN(end)) {
             throw new Error(MESSAGE_ERROR);
             break;
         }
