@@ -1,36 +1,71 @@
 'use strict'
 
 const MESSAGE_ERROR = 'Некорректный ввод';
+// 1 функция
+const makeObjectDeepCopy = (origObj)=>{
+let copObj={};
 
+for(let item in origObj){
+    if(origObj[item] instanceof Object){
+        copObj[item] = makeObjectDeepCopy(origObj[item]);
+        continue;
+    }
+    copObj[item] = origObj[item];
+}
+return copObj;
 
-//1 задача
-function radixInt(){
-let number = +prompt('Введите число');
-let radix = +prompt('Введите систему счисления');
-
-(!(isNaN(number)) && !(isNaN(radix)))? 
-console.log(number.toString(radix))
-:console.log(MESSAGE_ERROR);
 }
 
 
-// 2 задача
+// 2
 
-function mathInt(){
-    let secNum;
-    let firstNum = +prompt('Введите число');
+const selectFromInterval = (arr,start,end)=>{
+if(Array.isArray(arr)){
+    for(let i = 0;i<arr.length;i++){
+        if(isNaN(arr[i]) || isNaN(start) || isNaN(end)) {
+            throw new Error(MESSAGE_ERROR);
+            break;
+        }
+    }
+    if(start > arr.length) start = arr.length;
+    if(end > arr.length) end = arr.length;
+        if(start < end){
+           let result = arr.slice(start-1,end);
+            return result;
+        }else {
+           let result = arr.slice(end-1,start);
+            return result;
+        }
+}
+else throw new Error(MESSAGE_ERROR);
 
-    if(isNaN(firstNum) === false)
-    secNum = +prompt('Введите второе число');
-     else {
-        console.log(MESSAGE_ERROR);
-    return;}
+}
+
+// 3
+
+let myIterable = { from:1 , to:4 };
+
+myIterable[Symbol.iterator] =  function(){
+
+if(this.from && this.to){
+    if(this.from > this.to || isNaN(this.to) || isNaN(this.from)) throw new Error(MESSAGE_ERROR)
+    else{
+
+    return {
+        current: this.from,
+        last: this.to,
     
-    !isNaN(secNum)?console.log(`Ответ: ${firstNum + secNum},${firstNum - secNum}`):
-    console.log(MESSAGE_ERROR);
+    next(){
+        if(this.current <= this.last){
+            return { done:false, value:this.current++};
+        } else 
+            return {done:true};
+    }
+           }
+        }      
+                        }
+else throw new Error(MESSAGE_ERROR);
+
 
 }
 
-
-radixInt();
-mathInt();
