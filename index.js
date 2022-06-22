@@ -1,71 +1,39 @@
-'use strict'
+//1
 
-const MESSAGE_ERROR = 'Некорректный ввод';
-// 1 функция
-const makeObjectDeepCopy = (origObj)=>{
-let copObj={};
+Array.prototype.myFilter = function (callback, thisArg){
+    var result = [];
+    let array = this;
+    let check;
 
-for(let item in origObj){
-    if(origObj[item] instanceof Object){
-        copObj[item] = makeObjectDeepCopy(origObj[item]);
-        continue;
+    if(callback ){
+
+        for(index = 0;index<array.length;index++){
+           let element = array[index];
+            check = callback.apply(thisArg,[element,index,array]);
+            if(check === true) result.push(element);
+        }     
+        return result
     }
-    copObj[item] = origObj[item];
+  
+else {
+    throw new Error("Не переданы условия фильтрации");
 }
-return copObj;
-
 }
 
 
-// 2
+//2
 
-const selectFromInterval = (arr,start,end)=>{
-if(Array.isArray(arr)){
-    for(let i = 0;i<arr.length;i++){
-        if(isNaN(arr[i]) || isNaN(start) || isNaN(end)) {
-            throw new Error(MESSAGE_ERROR);
-            break;
+function createDebounceFunction(fn, ms) {
+let timeout;
+    return function(){
+        const fnCall = ()=>{
+            fn.apply(this,arguments);
         }
+
+        clearTimeout(timeout);
+
+        timeout = setTimeout(fnCall,ms);
     }
-    if(start > arr.length) start = arr.length;
-    if(end > arr.length) end = arr.length;
-        if(start < end){
-           let result = arr.slice(start-1,end);
-            return result;
-        }else {
-           let result = arr.slice(end-1,start);
-            return result;
-        }
-}
-else throw new Error(MESSAGE_ERROR);
 
-}
-
-// 3
-
-let myIterable = { from:1 , to:4 };
-
-myIterable[Symbol.iterator] =  function(){
-
-if(this.from && this.to){
-    if(this.from > this.to || isNaN(this.to) || isNaN(this.from)) throw new Error(MESSAGE_ERROR)
-    else{
-
-    return {
-        current: this.from,
-        last: this.to,
-    
-    next(){
-        if(this.current <= this.last){
-            return { done:false, value:this.current++};
-        } else 
-            return {done:true};
-    }
-           }
-        }      
-                        }
-else throw new Error(MESSAGE_ERROR);
-
-
-}
+  };
 
