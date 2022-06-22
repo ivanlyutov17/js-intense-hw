@@ -1,36 +1,39 @@
-'use strict'
+//1
 
-const MESSAGE_ERROR = 'Некорректный ввод';
+Array.prototype.myFilter = function (callback, thisArg){
+    var result = [];
+    let array = this;
+    let check;
 
+    if(callback ){
 
-//1 задача
-function radixInt(){
-let number = +prompt('Введите число');
-let radix = +prompt('Введите систему счисления');
-
-(!(isNaN(number)) && !(isNaN(radix)))? 
-console.log(number.toString(radix))
-:console.log(MESSAGE_ERROR);
+        for(index = 0;index<array.length;index++){
+           let element = array[index];
+            check = callback.apply(thisArg,[element,index,array]);
+            if(check === true) result.push(element);
+        }     
+        return result
+    }
+  
+else {
+    throw new Error("Не переданы условия фильтрации");
+}
 }
 
 
-// 2 задача
+//2
 
-function mathInt(){
-    let secNum;
-    let firstNum = +prompt('Введите число');
+function createDebounceFunction(fn, ms) {
+let timeout;
+    return function(){
+        const fnCall = ()=>{
+            fn.apply(this,arguments);
+        }
 
-    if(isNaN(firstNum) === false)
-    secNum = +prompt('Введите второе число');
-     else {
-        console.log(MESSAGE_ERROR);
-    return;}
-    
-    !isNaN(secNum)?console.log(`Ответ: ${firstNum + secNum},${firstNum - secNum}`):
-    console.log(MESSAGE_ERROR);
+        clearTimeout(timeout);
 
-}
+        timeout = setTimeout(fnCall,ms);
+    }
 
+  };
 
-radixInt();
-mathInt();
