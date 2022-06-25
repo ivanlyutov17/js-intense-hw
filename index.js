@@ -1,34 +1,23 @@
 //1
 
-function concatStrings(string = '', separator) {
+function concatStrings(string, separator) {
   var prevString = string;
-  const func = (nextStr = '') => {
-    func.valueOf = prevString;
-    if (typeof nextStr === 'string' && typeof prevString === 'string') {
-      prevString += `${separator}${nextStr}`;
-      func.valueOf = prevString;
+  var prevSep = separator;
+  const func = (nextStr, separator) => {
+    if (typeof nextStr === 'string') {
+      if (separator) {
+        prevString += `${prevSep}${nextStr}`;
+        prevSep = separator;
+      } else {
+        prevString += `${prevSep}${nextStr}`;
+      }
       return func;
     } else {
-      const fakeFunc = (nextStr) => {
-        if (typeof prevString === 'string') {
-          fakeFunc.valueOf = prevString;
-          prevString = prevString;
-          return fakeFunc;
-        } else {
-          prevString = '';
-          return fakeFunc;
-        }
-      };
-      fakeFunc.valueOf = prevString;
-      return fakeFunc;
+      return prevString;
     }
   };
-
   return func;
 }
-
-// let a = concatStrings('vzasd',',')('asdfg')('avsa')('abcd')(123);
-// console.log(a.valueOf);
 
 //2
 
