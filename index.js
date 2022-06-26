@@ -3,7 +3,7 @@
 function concatStrings(string, separator = '') {
   var prevString = string;
   var prevSep;
- typeof separator === 'string'? prevSep= separator : prevSep = '';
+  typeof separator === 'string' ? (prevSep = separator) : (prevSep = '');
   const func = (nextStr, separator) => {
     if (typeof nextStr === 'string') {
       if (separator && typeof separator === 'string') {
@@ -19,8 +19,7 @@ function concatStrings(string, separator = '') {
   };
   return func;
 }
-let a = concatStrings('asd',123)('nmk')();
-console.log(a);
+
 
 //2
 
