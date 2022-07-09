@@ -1,0 +1,86 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.field{
+    width: 34vw;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.buttons{
+    color: white;
+    background-color: black;
+    padding-top: 33px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+.field_input{
+    width: 100%;
+    height: 40px;
+    font-size: 36px;
+    background-color: black;
+    color: whitesmoke;
+}
+.field_allnumbers{
+    height: 100%;
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.number:not(:last-child){
+    width: 30%;
+    color: white;
+    font-size: 25px;
+    border-radius: 20px;
+    background-color: orange;
+}
+.number:last-child{
+    width: 100%;
+    border-radius: 20px;
+    background-color: orange;
+    color: white;
+    font-size: 25px;
+
+}
+.field_allopetators{
+    width: 45%;
+    height: 30%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+
+}
+.operator:not(:last-child){
+    width: 30%;
+    border-radius: 20px;
+    background-color: orange;
+    color: white;
+    font-size: 25px;
+
+
+}
+.operator:last-child{
+    width: 100%;
+    border-radius: 20px;
+    background-color: orange;
+    color: white;
+    font-size: 25px;
+}
+
+.number:hover,.operator:hover{
+    color: black;
+    background-color: blanchedalmond;
+}
+.number:active{
+    color: orange;
+    background-color: coral;
+}
